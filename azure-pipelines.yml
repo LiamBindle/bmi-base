@@ -4,27 +4,22 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables: 
-  ZLIB_COMMON:        1.2.11
-  HDF5_COMMON:        1.10.5
-  NETCDF_C_NEW:       4.7.1
-  NETCDF_FORTRAN_NEW: 4.4.5
-  NETCDF_C_OLD:       4.1.3
-
 # Images to build
 strategy:
   matrix:
     centos:
-      BASE_IMAGE:         centos
-      BASE_IMAGE_VERSION: 7
-      INSTALL_CONFIG:     centos
+      BASE_IMAGE:     centos
+      BASE_IMAGE_TAG: 7
+      INSTALL_CONFIG: centos
     ubuntu:
-      BASE_IMAGE:         ubuntu
-      BASE_IMAGE_VERSION: 16.04
-      INSTALL_CONFIG:     ubuntu
+      BASE_IMAGE:     ubuntu
+      BASE_IMAGE_TAG: 16.04
+      INSTALL_CONFIG: ubuntu
 
 # Steps to build images
 steps:
+- script: |
+    printf "##vso[task.setvariable variable=DATE_TAG;]%s\n" $(date "+%g.%m")
 - task: Docker@2
   displayName: Login to Docker Hub
   inputs:
@@ -35,10 +30,10 @@ steps:
   inputs:
     command: build
     repository: liambindle/build-matrix-images-base
-    tags: $(Date:yyyy.MM.dd)$(GCC_VERSION)-$(BASE_IMAGE)
+    tags: $(DATE_TAG)-$(BASE_IMAGE)
     arguments: |
       --build-arg BASE_IMAGE=$(BASE_IMAGE)
-      --build-arg BASE_IMAGE_VERSION=$(BASE_IMAGE_VERSION) 
+      --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) 
       --build-arg INSTALL_CONFIG=$(INSTALL_CONFIG) 
 - task: Docker@2
   displayName: Push image
@@ -47,4 +42,4 @@ steps:
     repository: liambindle/build-matrix-images-base
     command: push
     tags: |
-      $(Date:yyyy.MM.dd)$(GCC_VERSION)-$(BASE_IMAGE)
+      $(DATE_TAG)-$(BASE_IMAGE)
