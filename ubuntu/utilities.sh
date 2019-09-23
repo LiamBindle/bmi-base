@@ -1,7 +1,7 @@
 set -x
 set -e
 
-apt-get install -yq bzip2 zip wget curl autoconf automake flex bison make python git vim tcl tcl-dev patch libsigsegv-dev libtool texinfo findutils libpciaccess-dev numactl libxml2-dev pkgconf libuuid-devel
+apt-get install -yq bzip2 zip wget curl autoconf automake flex bison make python git vim tcl tcl-dev patch libsigsegv-dev libtool texinfo findutils libpciaccess-dev numactl libxml2-dev pkgconf uuid-dev
 
 MODULES_VERSION=4.3.0
 wget http://downloads.sourceforge.net/project/modules/Modules/modules-${MODULES_VERSION}/modules-${MODULES_VERSION}.tar.gz
