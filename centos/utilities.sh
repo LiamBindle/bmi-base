@@ -1,7 +1,7 @@
 set -x
 set -e
 
-yum install -y bzip2 zip wget curl autoconf automake flex bison make python git vim which environment-modules 
+yum install -y bzip2 zip wget curl autoconf automake flex bison make python git vim which environment-modules patch
 
 mkdir /modulefiles
 mkdir /modulefiles/gcc
@@ -16,3 +16,4 @@ cd spack
 git checkout v0.12.1
 . share/spack/setup-env.sh
 spack bootstrap
+spack install gcc@5 gcc@6 gcc@9
