@@ -14,6 +14,7 @@ cd ..
 rm -rf modules-*
 ln -s /usr/local/Modules/init/profile.sh /etc/profile.d/modules.sh
 source /usr/local/Modules/init/bash
+echo "source /usr/local/Modules/init/bash" >> /etc/bash.bashrc
 
 mkdir /modulefiles/gcc
 for GCC_VERSION in 4.9 5 6 7 8 9
