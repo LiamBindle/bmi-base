@@ -16,4 +16,4 @@ cd spack
 git checkout v0.12.1
 . share/spack/setup-env.sh
 spack bootstrap
-spack install gcc@5 gcc@6 gcc@9
+spack install --no-checksum gcc@5 gcc@6 gcc@9
