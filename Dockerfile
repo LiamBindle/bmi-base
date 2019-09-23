@@ -6,7 +6,7 @@ MAINTAINER Liam Bindle <liam.bindle@gmail.com>
 
 ARG INSTALL_CONFIG
 COPY ./${INSTALL_CONFIG}/. /
-RUN bash /compilers.sh
+RUN ls /etc/spack && bash /compilers.sh
 RUN bash /utilities.sh
 ENV MODULEPATH=${MODULEPATH}:/modulefiles
 ENV SPACK_ROOT=/spack
