@@ -5,8 +5,8 @@ FROM ${BASE_IMAGE}:${BASE_IMAGE_TAG}
 MAINTAINER Liam Bindle <liam.bindle@gmail.com>
 
 ARG INSTALL_CONFIG
-COPY ./${INSTALL_CONFIG}/. /
-RUN ls /etc/spack && bash /compilers.sh
+COPY ${INSTALL_CONFIG} /
+RUN bash /compilers.sh
 RUN bash /utilities.sh
 ENV MODULEPATH=${MODULEPATH}:/modulefiles
 ENV SPACK_ROOT=/spack
